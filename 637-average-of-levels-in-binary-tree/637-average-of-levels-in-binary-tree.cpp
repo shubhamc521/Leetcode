@@ -15,19 +15,45 @@ public:
     vector<double> averageOfLevels(TreeNode* root) {
         
         vector<double> result;
+        vector<int> level;
+        
+        
+        if(root==NULL) return result;;
         queue<TreeNode*> q;
         q.push(root);
-        while(!q.empty()) {
-            long temp=0;
-            int s=q.size();
-            for(int i=0;i<s;i++) {
-                TreeNode* t=q.front();
+        //result.push_back(double (root->val));
+        
+        
+        while(q.empty()==false)
+        {
+            int i,n;
+            double temp=0;
+            n=q.size();
+            for( i=0; i<n; i++)
+            {
+                TreeNode* curr = q.front();
                 q.pop();
-                if(t->left) q.push(t->left);
-                if(t->right) q.push(t->right);
-                temp+=t->val;
+                //level.push_back(curr->val);
+                temp+=curr->val;
+                if(curr->left!=NULL) 
+                {
+                    q.push(curr->left);
+                    //level.push_back(curr->left->val);
+                    //temp+=curr->left->val;
+                    //cout<<curr->left->val<<" ";
+                }
+                if(curr->right!=NULL)
+                {
+                    q.push(curr->right);
+                    //level.push_back(curr->right->val);
+                    //temp+=curr->right->val;
+                    //cout<<curr->right->val<<" ";
+                }
             }
-            result.push_back((double)temp/s);
+        
+            //cout<<endl<<"AVG"<<double(temp/q.size());
+            result.push_back(double(temp/n));
+            
         }
         return result;           
     }
