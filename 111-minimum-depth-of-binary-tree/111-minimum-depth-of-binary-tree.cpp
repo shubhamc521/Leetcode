@@ -11,22 +11,30 @@
  */
 class Solution {
 public:
-int minDepth(TreeNode* root) {
-    if (root == NULL) return 0;
-    queue<TreeNode*> Q;
-    Q.push(root);
-    int i = 0;
-    while (!Q.empty()) {
-        i++;
-        int k = Q.size();
-        for (int j=0; j<k; j++) {
-            TreeNode* rt = Q.front();
-            if (rt->left) Q.push(rt->left);
-            if (rt->right) Q.push(rt->right);
-            Q.pop();
-            if (rt->left==NULL && rt->right==NULL) return i;
+    int minDepth(TreeNode* root) {
+        int result;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        if(root==NULL) return 0;
+        int i=0;
+        while(q.empty()==false)
+        {
+            i++;
+            int s = q.size();
+            for(int j=0;j<s;j++)
+            {  
+                TreeNode* curr = q.front();
+            
+                if(curr->left) q.push(curr->left);
+                if(curr->right) q.push(curr->right);
+                q.pop();
+            
+                if(curr->left==NULL && curr->right==NULL)
+                return i;
+            }
         }
+        return -1;
     }
-    return -1; //For the compiler thing. The code never runs here.
-}
 };
